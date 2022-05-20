@@ -38,6 +38,12 @@ public class Main {
         System.out.println("Feliz dia :D");
         scanner.close();
     }
+
+    /**
+     * Valida que el número ingresado sea un entero
+     * @param scanner
+     * @return Entero
+     */
     public static int isNumberC(Scanner scanner) {
         boolean correct=false;
         int num = 0;
