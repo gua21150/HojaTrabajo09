@@ -27,10 +27,10 @@ public class Main {
 
         if(proceed == true) {
             floydGraph = new Floyd(data);
-            while(opcion!=4) {
+            while(opcion!=5) {
                 System.out.println("¿Qué deseas realizar?");
                 System.out.println("1. Calcular ruta entre dos ciudades \n2. Conocer ciudad en centro del grafo");
-                System.out.println("3. Modificar el grafo \n4. Finalizar programa");
+                System.out.println("3. Modificar el grafo debido a interrupción de tráfico\n4.  Modificar el grafo debido a nueva conexión. \5.Finalizar programa");
                 opcion = isNumberC(scanner);
 
                 switch (opcion) {
@@ -42,13 +42,35 @@ public class Main {
                         System.out.println(floydGraph.rutaCalculada(inicio, destino));
                         break;
                     case 2: // centro del grafo`
+                        System.out.println(floydGraph.graphCenter());
                         break;
-                    case 3: // modificar grafo
+                    case 3: // modificar por interrupcion
+                        System.out.println("Ingrese el nombre de la ciudad de origen que se ha interrumpido su conexion");
+                        inicio = scanner.nextLine();
+                        System.out.println("Ingrese el nombre de la ciudad de destino que se ha interrumpido su conexion");
+                        destino = scanner.nextLine();
+                        floydGraph.interrupcion(inicio, destino);
+                        System.out.println("Se ha recalculado el centro del grafo y las rutas");
+                        System.out.println(floydGraph.graphCenter());
+                        break;
+                    case 4: // modificar por nueva ruta
+                        System.out.println("Ingrese el nombre de la ciudad de origen");
+                        inicio = scanner.nextLine();
+                        System.out.println("Ingrese el nombre de la ciudad de destino");
+                        destino = scanner.nextLine();
+                        floydGraph.interrupcion(inicio, destino);
+                        System.out.println("Ingrese la distancia en kilometros entre las ciudades");
+                        float number = isFloatNumber(scanner);
+                        floydGraph.nuevaConexion(inicio, destino, number);
+                        System.out.println("Se ha recalculado el centro del grafo y las rutas");
+                        System.out.println(floydGraph.graphCenter());
                         break;
                     default:
                         System.out.println("Opción no válida. Nos vemos pronto");
                         break;
                 }
+                System.out.println("Vista general de rutas");
+                System.out.println(floydGraph.toString());
             }
         }
         System.out.println("Feliz dia :D");
@@ -66,6 +88,25 @@ public class Main {
         while(correct==false) {
             try{
                 num = Integer.parseInt(scanner.nextLine());
+                correct=true;
+            } catch(NumberFormatException e) {
+                System.out.println("Ingrese una opción valida");
+            }
+        }
+        return num;
+    }
+
+    /**
+     * Valida que el número ingresado sea un float valido
+     * @param scanner
+     * @return Float
+     */
+    public static float isFloatNumber(Scanner scanner) {
+        boolean correct=false;
+        float num = 0;
+        while(correct==false) {
+            try{
+                num = Float.parseFloat(scanner.nextLine());
                 correct=true;
             } catch(NumberFormatException e) {
                 System.out.println("Ingrese una opción valida");

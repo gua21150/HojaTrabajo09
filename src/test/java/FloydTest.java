@@ -9,7 +9,7 @@ class FloydTest {
 
     @BeforeEach
     void preparar(){
-        MatrixAd mat = FileManager.readFile("guategrafo.txt");
+        MatrixAd mat = FileManager.readFile("src/guategrafo.txt");
         mat.crearMatrizPeso();
         floyd = new Floyd(mat);
         // estos resultados fueron sacados de https://algorithms.discrete.ma.tum.de/graph-algorithms/spp-floyd-warshall/index_en.html
@@ -51,5 +51,10 @@ class FloydTest {
     void getMatrixD() {
         float[][] floydMe= floyd.getMatrixD();
         assertArrayEquals(floydC, floydMe);
+    }
+
+    @Test
+    void graphCenter() {
+        assertEquals("El centro del grafo está en SANTALUCIA con un valor de 185.0 KM.",floyd.graphCenter());
     }
 }
