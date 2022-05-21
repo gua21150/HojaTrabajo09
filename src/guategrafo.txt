@@ -1,0 +1,7 @@
+Mixco Antigua 20
+Antigua Escuintla 30
+Escuintla SantaLucia 15
+Santiago Guatemala 100
+Mixco SantaLucia 20
+Guatemala Peten 75
+Peten SantaLucia 10
